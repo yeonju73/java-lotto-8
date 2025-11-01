@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.ErrorMessage;
 
 public class PurchaseAmount {
-    public static final int LOTTO_PRICE = 1000;
     private final int amount;
 
     private PurchaseAmount(int amount) {
@@ -32,8 +31,12 @@ public class PurchaseAmount {
     }
 
     private static void validateUnit(int amount) {
-        if (amount % LOTTO_PRICE != 0) {
+        if (amount % LottoPolicy.PRICE.getValue() != 0) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_PURCHASE_UNIT.getMessage());
         }
+    }
+
+    public int calculateLottoCount() {
+        return amount / LottoPolicy.PRICE.getValue();
     }
 }
