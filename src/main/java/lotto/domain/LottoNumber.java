@@ -18,4 +18,5 @@ public class LottoNumber {
             throw new IllegalArgumentException();
         }
     }
+
 }
