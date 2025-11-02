@@ -16,4 +16,10 @@ public class Lottos {
     public int getLottoCount() {
         return lottos.size();
     }
+
+    public List<List<LottoNumber>> getSortedLottoNumbersList() {
+        return lottos.stream()
+                .map(Lotto::getSortedNumbers)
+                .toList();
+    }
 }

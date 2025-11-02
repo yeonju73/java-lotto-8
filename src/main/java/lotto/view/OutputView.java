@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.List;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
 public class OutputView {
@@ -10,9 +12,9 @@ public class OutputView {
 
     public void printIssuedLottos(Lottos lottos) {
         System.out.println("\n" + lottos.getLottoCount() + "개를 구매했습니다.");
-//        lottos.getLottos().stream()
-//                .map(Lotto::getNumbers) // 각 Lotto에서 숫자 리스트를 가져옴
-//                .forEach(System.out::println); // 형식에 맞게 출력
+
+        List<List<LottoNumber>> sortedLottoNumbers = lottos.getSortedLottoNumbersList();
+        sortedLottoNumbers.forEach(System.out::println);
     }
 
 
