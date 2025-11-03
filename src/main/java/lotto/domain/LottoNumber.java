@@ -7,7 +7,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber fromInteger(int number) {
         validateRange(number);
         return new LottoNumber(number);
     }
@@ -27,5 +27,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumber that)) {
+            return false;
+        }
+        return this.number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(number);
     }
 }

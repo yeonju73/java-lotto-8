@@ -9,19 +9,27 @@ public class LottoFactory {
         int count = purchaseAmount.calculateLottoCount();
 
         List<Lotto> lottoList = IntStream.range(0, count)
-                .mapToObj(i -> createLotto())
+                .mapToObj(i -> createRandomLotto())
                 .toList();
 
         return Lottos.of(lottoList);
     }
 
-    private Lotto createLotto() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(
+    private Lotto createRandomLotto() {
+        List<Integer> numbers = getRandomNumbers();
+        return new Lotto(numbers);
+    }
+
+    private static List<Integer> getRandomNumbers() {
+        return Randoms.pickUniqueNumbersInRange(
                 LottoPolicy.MIN_NUMBER.getValue(),
                 LottoPolicy.MAX_NUMBER.getValue(),
                 LottoPolicy.NUMBER_COUNT.getValue()
         );
+    }
 
-        return new Lotto(numbers);
+    public WinningLotto issueWinningLotto(List<Integer> winningNumbers) {
+        Lotto winningLotto = new Lotto(winningNumbers);
+        return new WinningLotto(winningLotto);
     }
 }

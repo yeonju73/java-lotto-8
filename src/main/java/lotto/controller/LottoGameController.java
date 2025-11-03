@@ -1,8 +1,11 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.LottoFactory;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
+import lotto.util.LottoNumbersParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,6 +24,9 @@ public class LottoGameController {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         Lottos lottos = lottoFactory.issueLottos(purchaseAmount);
         outputView.printIssuedLottos(lottos);
+
+        WinningLotto winningLotto = getWinningLotto();
+
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -28,6 +34,18 @@ public class LottoGameController {
             try {
                 String amountInput = inputView.readPurchaseAmount();
                 return PurchaseAmount.of(amountInput);
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private WinningLotto getWinningLotto() {
+        while (true) {
+            try {
+                String winningLottoInput = inputView.readWinningNumbers();
+                List<Integer> parsedNumber = LottoNumbersParser.parse(winningLottoInput);
+                return lottoFactory.issueWinningLotto(parsedNumber);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }

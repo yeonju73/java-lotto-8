@@ -4,7 +4,11 @@ public enum ErrorMessage {
     LOTTO_NUMBER_OUT_OF_RANGE("로또 번호는 1부터 45 사이여야 합니다."),
     EMPTY_AMOUNT_INPUT("구입 금액을 입력해 주세요."),
     INVALID_AMOUNT_NUMBER_FORMAT("구입 금액은 숫자만 입력 가능합니다."),
-    INVALID_PURCHASE_UNIT("구입 금액은 1,000원 단위여야 합니다.");
+    INVALID_PURCHASE_UNIT("구입 금액은 1,000원 단위여야 합니다."),
+    EMPTY_LOTTO_INPUT("입력값이 비어 있습니다."),
+    INVALID_LOTTO_NUMBER_FORMAT("로또 번호는 숫자만 가능합니다."),
+    INVALID_LOTTO_SIZE("로또 번호는 6개여야 합니다."),
+    DUPLICATE_LOTTO_NUMBERS("로또 번호에 중복이 있습니다.");
 
     private static final String ERROR_PREFIX = "[ERROR] ";
     private final String message;
