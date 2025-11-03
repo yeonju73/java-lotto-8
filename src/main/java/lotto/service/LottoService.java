@@ -6,11 +6,11 @@ import lotto.domain.BonusNumber;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoPolicy;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResultCalculator;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
 import lotto.util.LottoNumbersParser;
-import lotto.util.LottoResultCalculator;
 import lotto.util.ProfitCalculator;
 
 public class LottoService {

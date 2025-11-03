@@ -2,8 +2,8 @@ package lotto;
 
 import lotto.controller.LottoGameController;
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoResultCalculator;
 import lotto.service.LottoService;
-import lotto.util.LottoResultCalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
