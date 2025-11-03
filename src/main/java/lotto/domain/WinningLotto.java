@@ -23,4 +23,10 @@ public class WinningLotto {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBERS_WITH_BONUS_NUMBER.getMessage());
         }
     }
+
+    public LottoRank match(Lotto targetLotto) {
+        int matchCount = targetLotto.countMatchingNumbers(winningLotto);
+        boolean matchBonus = targetLotto.contains(bonusNumber);
+        return LottoRank.valueOf(matchCount, matchBonus);
+    }
 }

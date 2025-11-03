@@ -1,12 +1,17 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Map;
 import lotto.domain.BonusNumber;
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoPolicy;
+import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
 import lotto.util.LottoNumbersParser;
+import lotto.util.LottoResultCalculator;
+import lotto.util.ProfitCalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,6 +32,15 @@ public class LottoGameController {
 
         WinningLotto winningLotto = getWinningLotto();
 
+        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator();
+        lottoResultCalculator.calculateResults(lottos, winningLotto);
+        Map<LottoRank, Integer> results = lottoResultCalculator.getRankCount();
+
+        long totalPrize = lottoResultCalculator.getTotalPrizeMoney();
+        double profitRate = ProfitCalculator.calculateProfitRate(totalPrize,
+                lottos.getLottoCount() * LottoPolicy.PRICE.getValue());
+
+        outputView.printStatistics(results, profitRate);
     }
 
     private Lottos IssueLottos(PurchaseAmount purchaseAmount) {

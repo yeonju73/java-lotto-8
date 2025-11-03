@@ -22,4 +22,10 @@ public class Lottos {
                 .map(Lotto::getSortedNumbers)
                 .toList();
     }
+
+    public List<LottoRank> matchAll(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(winningLotto::match)
+                .toList();
+    }
 }

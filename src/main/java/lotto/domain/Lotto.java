@@ -43,4 +43,11 @@ public class Lotto {
         return this.numbers.stream()
                 .anyMatch(bonusNumber::isSameAs);
     }
+
+    public int countMatchingNumbers(Lotto winningLotto) {
+        return (int) this.numbers.stream()
+                .filter(winningLotto.numbers::contains)
+                .count();
+
+    }
 }
