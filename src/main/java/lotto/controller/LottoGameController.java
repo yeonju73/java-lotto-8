@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoFactory;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
@@ -22,11 +23,16 @@ public class LottoGameController {
 
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        Lottos lottos = lottoFactory.issueLottos(purchaseAmount);
-        outputView.printIssuedLottos(lottos);
+        Lottos lottos = IssueLottos(purchaseAmount);
 
         WinningLotto winningLotto = getWinningLotto();
 
+    }
+
+    private Lottos IssueLottos(PurchaseAmount purchaseAmount) {
+        Lottos lottos = lottoFactory.issueLottos(purchaseAmount);
+        outputView.printIssuedLottos(lottos);
+        return lottos;
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -44,8 +50,19 @@ public class LottoGameController {
         while (true) {
             try {
                 String winningLottoInput = inputView.readWinningNumbers();
-                List<Integer> parsedNumber = LottoNumbersParser.parse(winningLottoInput);
-                return lottoFactory.issueWinningLotto(parsedNumber);
+                List<Integer> winningNumbers = LottoNumbersParser.parse(winningLottoInput);
+                return WinningLotto.of(winningNumbers, getBonusNumber());
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private BonusNumber getBonusNumber() {
+        while (true) {
+            try {
+                String bonusNumberInput = inputView.readBonusNumbers();
+                return BonusNumber.of(bonusNumberInput);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }

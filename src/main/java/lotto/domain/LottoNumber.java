@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.ErrorMessage;
+import lotto.util.LottoNumbersParser;
+
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
@@ -12,10 +15,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
-    public static void validateRange(int number) {
+    public static LottoNumber fromString(String numberInput) {
+        int number = LottoNumbersParser.validateAndParseInt(numberInput);
+        validateRange(number);
+        return new LottoNumber(number);
+    }
+
+    private static void validateRange(int number) {
         if (number < LottoPolicy.MIN_NUMBER.getValue()
                 || number > LottoPolicy.MAX_NUMBER.getValue()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 

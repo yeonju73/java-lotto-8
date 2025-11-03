@@ -8,7 +8,8 @@ public enum ErrorMessage {
     EMPTY_LOTTO_INPUT("입력값이 비어 있습니다."),
     INVALID_LOTTO_NUMBER_FORMAT("로또 번호는 숫자만 가능합니다."),
     INVALID_LOTTO_SIZE("로또 번호는 6개여야 합니다."),
-    DUPLICATE_LOTTO_NUMBERS("로또 번호에 중복이 있습니다.");
+    DUPLICATE_LOTTO_NUMBERS("로또 번호에 중복이 있습니다."),
+    DUPLICATE_LOTTO_NUMBERS_WITH_BONUS_NUMBER("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
 
     private static final String ERROR_PREFIX = "[ERROR] ";
     private final String message;

@@ -38,4 +38,9 @@ public class Lotto {
                 .sorted()
                 .toList();
     }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return this.numbers.stream()
+                .anyMatch(bonusNumber::isSameAs);
+    }
 }

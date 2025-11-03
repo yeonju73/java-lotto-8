@@ -27,9 +27,4 @@ public class LottoFactory {
                 LottoPolicy.NUMBER_COUNT.getValue()
         );
     }
-
-    public WinningLotto issueWinningLotto(List<Integer> winningNumbers) {
-        Lotto winningLotto = new Lotto(winningNumbers);
-        return new WinningLotto(winningLotto);
-    }
 }
