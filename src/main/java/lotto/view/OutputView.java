@@ -13,6 +13,11 @@ public class OutputView {
     private static final String STATISTICS_HEADER = "\n당첨 통계\n---";
     private static final String PROFIT_FORMAT = "총 수익률은 %.1f%%입니다.";
 
+    private static final String RANK_RESULT_FORMAT = "%s - %d개%n";
+    private static final String SECOND_PRIZE_MESSAGE_FORMAT = "5개 일치, 보너스 볼 일치 (%s원)";
+    private static final String DEFAULT_PRIZE_MESSAGE_FORMAT = "%d개 일치 (%s원)";
+    private static final String MONEY_FORMAT_PATTERN = "#,###";
+
     public void printErrorMessage(String message) {
         System.out.println(message);
     }
@@ -33,20 +38,20 @@ public class OutputView {
     private void printMatchCount(Map<LottoRank, Integer> rankCountMap) {
         LottoRank.streamRanksSortedByMatchCount()
                 .filter(rank -> rank != LottoRank.NONE)
-                .forEach(rank -> System.out.printf("%s - %d개%n",
+                .forEach(rank -> System.out.printf(RANK_RESULT_FORMAT,
                         formatRankMessage(rank),
                         rankCountMap.getOrDefault(rank, 0)));
     }
 
     private String formatRankMessage(LottoRank rank) {
         if (rank == LottoRank.SECOND) {
-            return String.format("5개 일치, 보너스 볼 일치 (%s원)", formatMoney(rank.getPrize()));
+            return String.format(SECOND_PRIZE_MESSAGE_FORMAT, formatMoney(rank.getPrize()));
         }
-        return String.format("%d개 일치 (%s원)", rank.getMatchCount(), formatMoney(rank.getPrize()));
+        return String.format(DEFAULT_PRIZE_MESSAGE_FORMAT, rank.getMatchCount(), formatMoney(rank.getPrize()));
     }
 
     private String formatMoney(int amount) {
-        return new DecimalFormat("#,###").format(amount);
+        return new DecimalFormat(MONEY_FORMAT_PATTERN).format(amount);
     }
 
 
